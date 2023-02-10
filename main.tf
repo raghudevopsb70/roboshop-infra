@@ -1,4 +1,4 @@
 module "network" {
-  source = "github.com/ragghudevopsb70/tf-module-vpc"
+  source = "github.com/raghudevopsb70/tf-module-vpc"
 }
 
