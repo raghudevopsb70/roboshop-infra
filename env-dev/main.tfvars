@@ -14,7 +14,7 @@ vpc = {
           internet_gw = true
         }
       }
-      public_subnets = {
+      private_subnets = {
         web = {
           name       = "web"
           cidr_block = ["10.0.2.0/24", "10.0.3.0/24"]
