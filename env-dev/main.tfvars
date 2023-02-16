@@ -7,10 +7,9 @@ vpc = {
     availability_zone = ["us-east-1a", "us-east-1b"]
     subnets = {
       public = {
-        name          = "public"
-        cidr_block    = ["10.0.0.0/24", "10.0.1.0/24"]
-        internet_gw   = true
-        create_nat_gw = true
+        name        = "public"
+        cidr_block  = ["10.0.0.0/24", "10.0.1.0/24"]
+        internet_gw = true
       }
       web = {
         name       = "web"
