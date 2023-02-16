@@ -26,7 +26,7 @@ module "vpc" {
 //}
 
 //
-//output "subnet_ids" {
-//  value = lookup(lookup(module.subnets, "public", null), "subnet_ids", null)
-//}
+output "out" {
+  value = module.vpc
+}
 
