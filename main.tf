@@ -16,3 +16,7 @@ module "vpc" {
 //  env            = var.env
 //  subnet_ids     = "????"
 //}
+
+output "vpc" {
+  value = module.vpc
+}
