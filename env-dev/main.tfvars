@@ -44,3 +44,13 @@ docdb = {
   }
 }
 
+rds = {
+  main = {
+    vpc_name            = "main"
+    subnets_name        = "db"
+    engine              = "mysql"
+    engine_version      = "5.7.mysql_aurora.2.03.2"
+    number_of_instances = 1
+    instance_class      = "db.t3.micro"
+  }
+}
