@@ -66,17 +66,17 @@ module "rabbitmq" {
   deployment_mode    = each.value.deployment_mode
 }
 
-module "alb" {
-  source = "github.com/raghudevopsb70/tf-module-alb"
-  env    = var.env
-
-  for_each     = var.alb
-  subnet_ids   = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), each.value.subnets_type, null), each.value.subnets_name, null), "subnet_ids", null)
-  vpc_id       = lookup(lookup(module.vpc, each.value.vpc_name, null), "vpc_id", null)
-  allow_cidr   = lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "app", null), "cidr_block", null)
-  subnets_name = each.value.subnets_name
-}
+//module "alb" {
+//  source = "github.com/raghudevopsb70/tf-module-alb"
+//  env    = var.env
+//
+//  for_each     = var.alb
+//  subnet_ids   = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), each.value.subnets_type, null), each.value.subnets_name, null), "subnet_ids", null)
+//  vpc_id       = lookup(lookup(module.vpc, each.value.vpc_name, null), "vpc_id", null)
+//  allow_cidr   = lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "app", null), "cidr_block", null)
+//  subnets_name = each.value.subnets_name
+//}
 
 output "vpc" {
-  value = module.vpc
+  value = lookup(lookup(lookup(lookup(module.vpc, "main", null), "public_subnets", null), "public", null), "subnet_ids", null)
 }
