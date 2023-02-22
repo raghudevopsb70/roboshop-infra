@@ -79,7 +79,7 @@ module "alb" {
 }
 
 module "apps" {
-  source = "github.com/raghudevopsb70/tf-module-alb"
+  source = "github.com/raghudevopsb70/tf-module-app"
   env    = var.env
 
   for_each   = var.apps
