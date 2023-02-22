@@ -94,7 +94,7 @@ alb = {
 
 apps = {
   frontend = {
-    name         = "frontend"
+    component    = "frontend"
     vpc_name     = "main"
     subnets_type = "private_subnet_ids"
     subnets_name = "web"
