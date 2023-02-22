@@ -78,6 +78,18 @@ module "alb" {
   internal     = each.value.internal
 }
 
+module "apps" {
+  source = "github.com/raghudevopsb70/tf-module-alb"
+  env    = var.env
+
+  for_each   = var.apps
+  subnet_ids = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), each.value.subnets_type, null), each.value.subnets_name, null), "subnet_ids", null)
+  vpc_id     = lookup(lookup(module.vpc, each.value.vpc_name, null), "vpc_id", null)
+  allow_cidr = lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "app", null), "cidr_block", null)
+  component  = each.value.component
+  app_port   = each.value.app_port
+}
+
 //output "vpc" {
 //  value = lookup(lookup(lookup(lookup(module.vpc, "main", null), "public_subnets", null), "public", null), "subnet_ids", null)
 //}
