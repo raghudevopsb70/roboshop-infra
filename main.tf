@@ -98,6 +98,6 @@ module "apps" {
 
 }
 
-output "redis" {
-  value = module.elasticache
+output "rds" {
+  value = module.rds
 }
