@@ -82,6 +82,8 @@ module "apps" {
   source = "github.com/raghudevopsb70/tf-module-app"
   env    = var.env
 
+  depends_on = [module.docdb, module.rds, module.rabbitmq, module.alb, module.rds]
+
   for_each         = var.apps
   subnet_ids       = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), each.value.subnets_type, null), each.value.subnets_name, null), "subnet_ids", null)
   vpc_id           = lookup(lookup(module.vpc, each.value.vpc_name, null), "vpc_id", null)
