@@ -100,5 +100,5 @@ module "apps" {
 
 output "rds" {
   value     = module.rds
-  sensitive = false
+  sensitive = true
 }
