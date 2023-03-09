@@ -117,15 +117,17 @@ resource "aws_ec2_tag" "tag" {
 }
 
 resource "null_resource" "apply" {
-  connection {
-    host     = aws_spot_instance_request.load.public_ip
-    user     = "root"
-    password = "DevOps321"
+  provisioner "remote-exec" {
+    connection {
+      host     = aws_spot_instance_request.load.public_ip
+      user     = "root"
+      password = "DevOps321"
+    }
+    inline = [
+      "curl -s -L https://get.docker.com | bash",
+      "systemctl enable docker",
+      "systemctl start docker",
+      "docker pull robotshop/rs-load"
+    ]
   }
-  inline = [
-    "curl -s -L https://get.docker.com | bash",
-    "systemctl enable docker",
-    "systemctl start docker",
-    "docker pull robotshop/rs-load"
-  ]
 }
