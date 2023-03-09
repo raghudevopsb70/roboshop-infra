@@ -125,6 +125,7 @@ resource "null_resource" "apply" {
   inline = [
     "curl -s -L https://get.docker.com | bash",
     "systemctl enable docker",
-    "systemctl start docker"
+    "systemctl start docker",
+    "docker pull robotshop/rs-load"
   ]
 }
