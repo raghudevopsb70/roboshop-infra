@@ -180,7 +180,7 @@ apps = {
     max_size                = 5
     min_size                = 2
     desired_capacity        = 2
-    instance_type           = "t3.micro"
+    instance_type           = "t3.small"
     alb                     = "private"
     listener_priority       = 104
   }
