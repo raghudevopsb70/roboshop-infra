@@ -83,6 +83,7 @@ alb = {
     subnets_type = "public_subnet_ids"
     subnets_name = "public"
     internal     = false
+    dns_domain   = "www.devopsb71.online"
   }
 
   private = {
@@ -90,6 +91,7 @@ alb = {
     subnets_type = "private_subnet_ids"
     subnets_name = "app"
     internal     = true
+    dns_domain   = ""
   }
 }
 

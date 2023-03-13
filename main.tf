@@ -73,6 +73,7 @@ module "alb" {
   allow_cidr   = each.value.internal ? concat(lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "web", null), "cidr_block", null), lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "app", null), "cidr_block", null)) : ["0.0.0.0/0"]
   subnets_name = each.value.subnets_name
   internal     = each.value.internal
+  dns_domain   = each.value.dns_domain
 }
 
 module "apps" {
