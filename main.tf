@@ -171,7 +171,7 @@ module "rabbitmq" {
 module "eks" {
   source             = "github.com/r-devops/tf-module-eks"
   ENV                = var.env
-  PRIVATE_SUBNET_IDS = lookup(lookup(lookup(lookup(module.vpc, "main", null), "private_subnet_ids", null), "apps", null), "subnet_ids", null)
+  PRIVATE_SUBNET_IDS = lookup(lookup(lookup(lookup(module.vpc, "main", null), "private_subnet_ids", null), "app", null), "subnet_ids", null)
   PUBLIC_SUBNET_IDS  = lookup(lookup(lookup(lookup(module.vpc, "main", null), "public_subnet_ids", null), "public", null), "subnet_ids", null)
   DESIRED_SIZE       = 2
   MAX_SIZE           = 2
