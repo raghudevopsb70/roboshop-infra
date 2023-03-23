@@ -63,19 +63,19 @@ module "rabbitmq" {
   allow_cidr = lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "app", null), "cidr_block", null)
 }
 
-module "alb" {
-  source = "github.com/raghudevopsb70/tf-module-alb"
-  env    = var.env
-
-  for_each     = var.alb
-  subnet_ids   = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), each.value.subnets_type, null), each.value.subnets_name, null), "subnet_ids", null)
-  vpc_id       = lookup(lookup(module.vpc, each.value.vpc_name, null), "vpc_id", null)
-  allow_cidr   = each.value.internal ? concat(lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "web", null), "cidr_block", null), lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "app", null), "cidr_block", null)) : ["0.0.0.0/0"]
-  subnets_name = each.value.subnets_name
-  internal     = each.value.internal
-  dns_domain   = each.value.dns_domain
-}
-
+//module "alb" {
+//  source = "github.com/raghudevopsb70/tf-module-alb"
+//  env    = var.env
+//
+//  for_each     = var.alb
+//  subnet_ids   = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), each.value.subnets_type, null), each.value.subnets_name, null), "subnet_ids", null)
+//  vpc_id       = lookup(lookup(module.vpc, each.value.vpc_name, null), "vpc_id", null)
+//  allow_cidr   = each.value.internal ? concat(lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "web", null), "cidr_block", null), lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "app", null), "cidr_block", null)) : ["0.0.0.0/0"]
+//  subnets_name = each.value.subnets_name
+//  internal     = each.value.internal
+//  dns_domain   = each.value.dns_domain
+//}
+//
 
 ## This is for servers. For Mutable & Immutable
 //module "apps" {
@@ -167,3 +167,13 @@ module "alb" {
 //output "KUBE_CONFIG" {
 //  value = "scp centos@${module.minikube.public_ip}:/home/centos/kubeconfig ~/.kube/config"
 //}
+
+module "eks" {
+  source             = "github.com/r-devops/tf-module-eks"
+  ENV                = var.env
+  PRIVATE_SUBNET_IDS = lookup(lookup(lookup(lookup(module.vpc, "main", null), "private_subnets", null), "apps", null), "subnet_ids", null)
+  PUBLIC_SUBNET_IDS  = lookup(lookup(lookup(lookup(module.vpc, "main", null), "public_subnets", null), "public", null), "subnet_ids", null)
+  DESIRED_SIZE       = 2
+  MAX_SIZE           = 2
+  MIN_SIZE           = 2
+}
