@@ -107,7 +107,7 @@ module "rabbitmq" {
 // Load Test Machine
 resource "aws_spot_instance_request" "load" {
   instance_type          = "t3.medium"
-  ami                    = "ami-0a017d8ceb274537d"
+  ami                    = "ami-068510c19de1f805d"
   subnet_id              = "subnet-06b4a5240a6690f30"
   vpc_security_group_ids = ["sg-0b76619b671c82bea"]
   wait_for_fulfillment   = true
